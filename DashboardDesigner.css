@@ -1,0 +1,7 @@
+﻿.dx-dashboard-form-left-column .dx-dashboard-form-column-content-wrapper .dx-dashboard-form-row .dx-dashboard-form-row-caption .dx-dashboard-form-row-action-list .dx-dashboard-form-row-action {
+    display: none !important;
+}
+
+.dxrd-wizard-create-query-page .dx-radiogroup {
+    display: none;
+}
