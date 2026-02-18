@@ -1,0 +1,143 @@
+version: '3.8'
+services:
+  skreport_prd:
+    image: eduardopaulorocha/skreport:latest
+    container_name: sk_prd
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      SKREPORT_ConnectionStrings__SKConnectionString: "Host=postgres_prd;Port=5432;Database=${POSTGRES_DB_PRD};User ID=${POSTGRES_USER_PRD};Password=${POSTGRES_PASSWORD_PRD};Pooling=true;"
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Database: ${POSTGRES_DB_PRD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Host: postgres_prd
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__pt_br__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__en_us__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__es_es__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__pt_pt__Password: ${DB_SCHEMA_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_PRD}
+      POSTGRES_DB: ${POSTGRES_DB_PRD}
+      DB_APP_USER: ${POSTGRES_USER_PRD}
+      DB_APP_USER_PASSWORD: ${POSTGRES_PASSWORD_PRD}
+      DB_ORIGINAL_HOST: ${POSTGRES_DB_PRD_ORIGINAL_HOST}
+      DB_PORT: ${POSTGRES_DB_PORT_PRD}
+      DB_HOST: ${POSTGRES_DB_HOST_PRD}
+      DB_SCHEMAS: "${DB_SCHEMAS_PRD}"
+      SK_REPORT_ADMIN_USER: "${SK_REPORT_ADMIN_USER}"
+      SK_REPORT_ADMIN_PASSWORD: "${SK_REPORT_ADMIN_PASSWORD}"
+    ports:
+      - "5000:80"
+    deploy:
+      resources:
+        limits:
+          cpus: "2.00"
+          memory: 6g
+        reservations:
+          memory: 2g
+    depends_on:
+      - postgres_prd
+    networks:
+      - skreport-network
+    volumes:
+      - ./init-scripts:/usr/local/bin
+    entrypoint: [ "/bin/bash", "/usr/local/bin/wait-for-db.sh" ]
+
+  skreport_test:
+    image: eduardopaulorocha/skreport:latest
+    container_name: sk_test
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      SKREPORT_ConnectionStrings__SKConnectionString: "Host=postgres_test;Port=5432;Database=${POSTGRES_DB_TEST};User ID=${POSTGRES_USER_TEST};Password=${POSTGRES_PASSWORD_TEST};Pooling=true;"
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Database: ${POSTGRES_DB_PRD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Host: postgres_test
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__pt_br__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__en_us__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__es_es__Password: ${DB_SCHEMA_PASSWORD}
+      SKREPORT_SmartKanvasSettings__DatabaseSettings__Schemas__pt_pt__Password: ${DB_SCHEMA_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST}
+      POSTGRES_DB: ${POSTGRES_DB_TEST}
+      DB_APP_USER: ${POSTGRES_USER_TEST}
+      DB_APP_USER_PASSWORD: ${POSTGRES_PASSWORD_TEST}
+      DB_ORIGINAL_HOST: ${POSTGRES_DB_TEST_ORIGINAL_HOST}
+      DB_PORT: ${POSTGRES_DB_PORT_TEST}
+      DB_HOST: ${POSTGRES_DB_HOST_TEST}
+      DB_SCHEMAS: "${DB_SCHEMAS_TEST}"
+      SK_REPORT_ADMIN_USER: "${SK_REPORT_ADMIN_USER}"
+      SK_REPORT_ADMIN_PASSWORD: "${SK_REPORT_ADMIN_PASSWORD}"
+    ports:
+      - "5001:80"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 3g
+        reservations:
+          memory: 512M
+    depends_on:
+      - postgres_test
+    networks:
+      - skreport-network
+    volumes:
+      - ./init-scripts:/usr/local/bin
+    entrypoint: [ "/bin/bash", "/usr/local/bin/wait-for-db.sh" ]
+
+  postgres_prd:
+    image: eduardopaulorocha/skreport_db_pg:latest
+    container_name: sk_postgres_prd
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_PRD}
+      POSTGRES_DB: ${POSTGRES_DB_PRD}
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "2.00"
+          memory: 7g
+        reservations:
+          memory: 1g
+    volumes:
+      - ./db_data_prd:/var/lib/postgresql/data
+      - ./init-scripts/init-db-config.sh:/docker-entrypoint-initdb.d/init-db-config.sh
+    networks:
+      - skreport-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres_test:
+    image: eduardopaulorocha/skreport_db_pg:latest
+    container_name: sk_postgres_test
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST}
+      POSTGRES_DB: ${POSTGRES_DB_TEST}
+    ports:
+      - "65432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 3g
+        reservations:
+          memory: 1g
+    volumes:
+      - ./db_data_test:/var/lib/postgresql/data
+      - ./init-scripts/init-db-config.sh:/docker-entrypoint-initdb.d/init-db-config.sh
+    networks:
+      - skreport-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  skreport-network:
+    driver: bridge
+
+volumes:
+  db_data_prd:
+  db_data_test:
