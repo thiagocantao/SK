@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "SK.Report.DashboardEditor": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "ReportDesigner?userID=1648564757597x228740206914173280&workspaceID=1655328096329x845357672738586600&reportID=1691936799736x969153100301205500&editMode=no&language=pt_br&statusTitle=OK&objectID=1655328096329x845357672738586600&objectType=Workspace",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadEnabled": false,
+      "applicationUrl": "http://0.0.0.0:5000;https://0.0.0.0:5001"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://+:80"
+      },
+      "publishAllPorts": true,
+      "useSSL": false
+    }
+  }
+}

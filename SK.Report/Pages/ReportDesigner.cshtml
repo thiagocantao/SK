@@ -1,0 +1,90 @@
+﻿@page
+
+<link rel="stylesheet" href="~/css/designer.part.bundle.css" />
+<link rel="stylesheet" href="~/css/ace/ace.bundle.css" />
+
+<script src="~/js/designer.part.bundle.js"></script>
+
+<script type="text/javascript">
+
+    function customizeMenuActions(s, e) {
+        
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.NewReport).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.NewReportViaWizard).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.ReportWizard).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.OpenReport).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.SaveAs).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.Localization).visible = false;
+        e.GetById(DevExpress.Reporting.Designer.Actions.ActionId.Exit).visible = false;
+
+    }
+
+    function CustomizeViewerMenuActions(s, e) {
+
+    var actions = e.Actions;
+
+    // Get the "Print Page" action and hide it. 
+    var exportToAction = e.GetById(DevExpress.Reporting.Viewer.ActionId.ExportTo)
+    if (exportToAction)
+            exportToAction.visible = false;
+
+    // Add a new action. 
+    actions.splice(actions.indexOf(exportToAction), 0, {
+        text: "PDF",
+        hasSeparator: false,
+        imageClassName: "customButton",
+        imageTemplateName: "dxrd-svg-toolbox-pdfcontent",
+        disabled: ko.observable(false),
+        visible: true,
+        hotKey: { ctrlKey: true, keyCode: "Z".charCodeAt(0) },
+        clickAction: function () {
+                DocumentViewer.ExportTo('pdf')
+        }
+    })
+};
+
+
+</script>
+
+@model SK.Report.Pages.TestReportModel
+
+@{
+    if (Model.EditMode && !Model.DesktopDevice)
+    {
+                <div aria-live="polite" aria-atomic="true" class="position-relative">
+                    <div class="toast-container position-absolute top-0 end-0 p-3">
+                        <div class="toast show align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    Este não é o dispositivo idal para edição do report
+                                </div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    }
+}
+
+@{
+    if(Model.EditMode){
+    @(Html.DevExpress().ReportDesigner("reportDesigner")
+            .Height("1000px")
+            .CssClassName("fullscreen")
+            .ClientSideEvents(configure => { configure.CustomizeMenuActions("customizeMenuActions"); })
+            .Bind(Model.ReportID)
+    )
+    } 
+    else{
+
+    @(Html.DevExpress().WebDocumentViewer("DocumentViewer")
+        .Height("1000px")
+        .ClientSideEvents(configure => { 
+                    configure.CustomizeMenuActions("CustomizeViewerMenuActions");
+        })
+        .Bind(Model.ReportID))
+
+    }
+}
+
+

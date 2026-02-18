@@ -1,0 +1,19 @@
+﻿@page
+@using System.Linq;
+@model SK.Report.Pages.InfoModel
+@{
+    Layout = null;
+}
+<p>@Model.DataHora</p>
+<p>@Model.DataInicial</p>
+<p>@Model.Ip</p>
+<p>@Model.Ip2</p>
+<p>Id: @Model.Id</p>
+<p>CS: @Model.CS</p>
+
+<p>@Model.DbSchema</p>
+
+@foreach (var variavel in @Model.Variaveis)
+{
+    <p>@variavel.Key: @variavel.Value</p>
+}

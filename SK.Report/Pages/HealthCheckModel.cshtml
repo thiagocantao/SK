@@ -1,0 +1,7 @@
+﻿@page "/healthcheck"
+@model SK.Report.Pages.HealthCheckModel
+@{
+    Layout = null;
+    Response.ContentType = "application/json";
+}
+@Html.Raw(Model.HealthStatusJson)

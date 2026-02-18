@@ -1,0 +1,614 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>77e10a63-3252-4d6f-b73b-141e7272571d</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.AspNetCore.Dashboard" Version="23.2.12" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="23.2.12" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.12" />
+    <PackageReference Include="DevExpress.Pdf.SkiaRenderer" Version="23.2.12" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.22" />
+    <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.22.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+    <PackageReference Include="RestSharp" Version="112.0.0" />
+    <PackageReference Include="Wangkanai.Detection" Version="6.11.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="node_modules\**" />
+    <Content Remove="node_modules\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="pt-BR\DevExpress.AspNetCore.Resources.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Blazor.Reporting.v23.1.Viewer.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Blazor.RichEdit.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Blazor.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Charts.Designer.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Dashboard.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Dashboard.v23.1.Web.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Dashboard.v23.1.Win.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Data.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.DataAccess.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.DataAccess.v23.1.UI.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Diagram.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Dialogs.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Drawing.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.EntityFrameworkCore.Security.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.AuditTrail.Xpo.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Blazor.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Chart.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.CloneObject.Xpo.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Dashboards.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Dashboards.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Dashboards.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.FileAttachment.Blazor.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.FileAttachment.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.FileAttachment.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.HtmlPropertyEditor.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Kpi.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Maps.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Notifications.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Notifications.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Objects.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Office.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Office.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.PivotChart.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.PivotChart.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.PivotChart.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.PivotGrid.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.PivotGrid.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Reports.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Reports.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Reports.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ReportsV2.Blazor.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ReportsV2.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ReportsV2.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ReportsV2.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Scheduler.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Scheduler.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Scheduler.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ScriptRecorder.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ScriptRecorder.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Security.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Security.Xpo.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.StateMachine.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Validation.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Validation.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.ViewVariantsModule.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Workflow.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ExpressApp.Workflow.Win.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Map.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Mvvm.v23.1.DataModel.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Office.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Pdf.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Persistent.Base.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.PivotGrid.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Printing.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.ReportServer.v23.1.Localization.resources.dll" />
+    <None Remove="pt-BR\DevExpress.RichEdit.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Snap.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Snap.v23.1.Extensions.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Snap.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Sparkline.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Spreadsheet.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Utils.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Utils.v23.1.UI.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxDiagram.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxGantt.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxHtmlEditor.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxRichEdit.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxScheduler.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxSpellChecker.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxSpreadsheet.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.ASPxTreeList.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.Resources.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Web.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Charts.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.CodeView.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Controls.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Core.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Docking.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.DocumentViewer.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Gantt.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Gauges.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Grid.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.LayoutControl.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.NavBar.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.PdfViewer.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Printing.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.PropertyGrid.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.ReportDesigner.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Ribbon.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.RichEdit.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Scheduler.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Scheduling.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.SpellChecker.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpf.Spreadsheet.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.Xpo.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraBars.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraCharts.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraCharts.v23.1.Wizard.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraEditors.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraGantt.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraGauges.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraGauges.v23.1.Presets.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraGrid.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraLayout.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraNavBar.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraPdfViewer.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraPivotGrid.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraPrinting.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraReports.v23.1.Extensions.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraReports.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraReports.v23.1.Web.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraRichEdit.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraScheduler.v23.1.Core.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraScheduler.v23.1.Extensions.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraScheduler.v23.1.Reporting.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraScheduler.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraSpellChecker.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraSpreadsheet.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraTreeList.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraVerticalGrid.v23.1.resources.dll" />
+    <None Remove="pt-BR\DevExpress.XtraWizard.v23.1.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\SKReportDashboardDesigner - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pt-BR\DevExpress.AspNetCore.Resources.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Blazor.Reporting.v23.1.Viewer.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Blazor.RichEdit.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Blazor.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Charts.Designer.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Dashboard.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Dashboard.v23.1.Web.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Dashboard.v23.1.Win.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Data.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.DataAccess.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.DataAccess.v23.1.UI.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Diagram.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Dialogs.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Drawing.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.EntityFrameworkCore.Security.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.AuditTrail.Xpo.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Blazor.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Chart.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.CloneObject.Xpo.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Dashboards.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Dashboards.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Dashboards.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.FileAttachment.Blazor.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.FileAttachment.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.FileAttachment.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.HtmlPropertyEditor.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Kpi.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Maps.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Notifications.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Notifications.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Objects.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Office.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Office.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.PivotChart.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.PivotChart.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.PivotChart.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.PivotGrid.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.PivotGrid.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Reports.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Reports.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Reports.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ReportsV2.Blazor.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ReportsV2.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ReportsV2.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ReportsV2.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Scheduler.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Scheduler.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Scheduler.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ScriptRecorder.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ScriptRecorder.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Security.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Security.Xpo.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.StateMachine.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Validation.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Validation.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.ViewVariantsModule.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Workflow.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ExpressApp.Workflow.Win.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Map.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Mvvm.v23.1.DataModel.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Office.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Pdf.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Persistent.Base.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.PivotGrid.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Printing.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.ReportServer.v23.1.Localization.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.RichEdit.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Snap.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Snap.v23.1.Extensions.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Snap.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Sparkline.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Spreadsheet.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Utils.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Utils.v23.1.UI.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxDiagram.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxGantt.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxHtmlEditor.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxRichEdit.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxScheduler.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxSpellChecker.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxSpreadsheet.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.ASPxTreeList.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.Resources.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Web.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Charts.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.CodeView.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Controls.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Core.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Docking.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.DocumentViewer.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Gantt.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Gauges.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Grid.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.LayoutControl.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.NavBar.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.PdfViewer.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Printing.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.PropertyGrid.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.ReportDesigner.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Ribbon.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.RichEdit.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Scheduler.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Scheduling.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.SpellChecker.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpf.Spreadsheet.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.Xpo.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraBars.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraCharts.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraCharts.v23.1.Wizard.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraEditors.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraGantt.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraGauges.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraGauges.v23.1.Presets.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraGrid.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraLayout.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraNavBar.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraPdfViewer.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraPivotGrid.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraPrinting.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraReports.v23.1.Extensions.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraReports.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraReports.v23.1.Web.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraRichEdit.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraScheduler.v23.1.Core.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraScheduler.v23.1.Extensions.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraScheduler.v23.1.Reporting.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraScheduler.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraSpellChecker.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraSpreadsheet.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraTreeList.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraVerticalGrid.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\DevExpress.XtraWizard.v23.1.resources.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\ServiceDependencies\SKReportDashboardDesigner - Zip Deploy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\DashboardDesigner.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="pt-BR\json resources\dx-analytics-core.pt-BR.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="pt-BR\json resources\dx-dashboard.pt-BR.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="pt-BR\json resources\dx-reporting.pt-BR.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="pt-BR\json resources\dx-rich.pt-BR.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="pt-BR\json resources\dx-spreadsheet.pt-BR.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="LibraryManagerRestore" Condition=" '$(Configuration)' == 'Debug' And !Exists('node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="." Command="npm install" />
+  </Target>
+</Project>

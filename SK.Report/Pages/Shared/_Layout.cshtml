@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SKReport</title>
+
+    <link href="css/site.min.css" rel="stylesheet" />
+    <link href="css/DashboardDesigner.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+
+    @{
+        var colorScheme = Context.Request.Query["colorSchema"].Count() > 0 ? Context.Request.Query["colorSchema"][0] : "material.teal.light.compact";
+    }
+    <link href="~/css/dashboard/dx-dashboard.@(colorScheme).min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/analytics-core/dx-analytics.@(colorScheme).css" rel="stylesheet" asp-append-version="true" />
+
+    <script src="~/js/thirdparty.bundle.js"></script>
+    
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>
